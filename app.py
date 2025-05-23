@@ -153,19 +153,19 @@ def init_admin():
 @app.route("/init-contestants", methods=["GET"])
 def init_contestants():
     # Folder path containing the images
-    folder_path = 'static/contestant-images/season-47'
+    folder_path = 'static/contestant-images/season-48'
 
     # Get a list of filenames without extensions
     names = [os.path.splitext(filename)[0] for filename in os.listdir(folder_path) if filename.endswith(('.webp'))]
 
     for name in names:
-        if db.execute("INSERT INTO contestant (name, image_path, left_show_in_episode, season) VALUES (?, ?, NULL, ?)", name.capitalize(), "static/contestant-images/season-47/" + name + ".webp", 47):
+        if db.execute("INSERT INTO contestant (name, image_path, left_show_in_episode, season) VALUES (?, ?, NULL, ?)", name.capitalize(), "static/contestant-images/season-48/" + name + ".webp", 48):
             flash(name + " successfully added.", "message")
         else:
             flash("COULD NOT ADD" + name, "error")
 
-    if db.execute("INSERT INTO settings (current_season) VALUES (47)"):
-        flash("Set season to 47.", "message")
+    if db.execute("INSERT INTO settings (current_season) VALUES (48)"):
+        flash("Set season to 48.", "message")
     else:
         flash("Error setting season.", "error")
     return redirect(url_for('index'))
